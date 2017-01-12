@@ -21,28 +21,11 @@ var companySalesData = [
     sales: [ 500, 100 ]
   }
 ];
-//function calculateSalesTax(salesData, taxRates) {
-//  companiesWithTotalSales = calculateSalesPerCompany(salesData)
-//  companiesWithTotalSalesAndTaxes = calculateSalesTaxes(companiesWithTotalSales, taxRates)
-//  sumSalesDataOverProvinces(companiesWithTotalSalesAndTaxes)
-//}
-
-//function calculateSalesTaxes
-  // loop through array to multiply salesTotal with specific taxrates
 
 
-  function calculateSalesTax (salesData, tax) {
-    for(var i = 0; i < salesData.length; i++) {
-      if (salesData[i].province == "BC") {
-      salesData[i].salesTax = (salesData[i].salesTotal * tax['BC'])
-    } else if (salesData[i].province == "AB") {
-      salesData[i].salesTax = (salesData[i].salesTotal * tax['AB'])
-    } else {
-      salesData[i].salesTax = (salesData[i].salesTotal * tax['SK'])
-      }
-    }
-    return salesData
-  };
+function sum(list) {
+  return list.reduce( ( acc, cur ) => acc + cur, 0 )
+}
 
 
 function calculateSalesPerCompany (salesData) {
@@ -53,5 +36,28 @@ return salesData
 }
 
 
-console.log(calculateSalesPerCompany(companySalesData))
+  function calculateSalesTax (salesData, tax) {
+    var result = {}
+
+    for(var i = 0; i < salesData.length; i++) {
+      var name = salesData[i].name;
+      var province = salesData[i].province;
+      var sales = sum(salesData[i].sales)
+
+      if(result[name] === undefined) {
+        result[name] = {
+          totalSales: 0,
+          totalTaxes: 0
+        };
+      }
+
+      result[name].totalSales += sales
+      result[name].totalTaxes += sales * tax[province]
+    }
+    return result
+  };
+
+
+
+
 console.log(calculateSalesTax(companySalesData, salesTaxRates))
