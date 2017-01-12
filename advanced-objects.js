@@ -28,12 +28,12 @@ function sum(list) {
 }
 
 
-function calculateSalesPerCompany (salesData) {
-for(var i = 0; i < salesData.length; i++) {
-  salesData[i].salesTotal = salesData[i].sales.reduce( ( acc, cur ) => acc + cur, 0 );
-}
-return salesData
-}
+// function calculateSalesPerCompany (salesData) {
+// for(var i = 0; i < salesData.length; i++) {
+//   salesData[i].salesTotal = salesData[i].sales.reduce( ( acc, cur ) => acc + cur, 0 );
+// }
+// return salesData
+// }
 
 
   function calculateSalesTax (salesData, tax) {
